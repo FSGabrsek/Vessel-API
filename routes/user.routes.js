@@ -27,6 +27,6 @@ router.get(
 
 router.delete(
     '/user/:userId/follower/:followerId'
-)
+);
 
 module.exports = router;
