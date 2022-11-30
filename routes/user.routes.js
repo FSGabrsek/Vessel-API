@@ -1,32 +1,41 @@
 const express = require('express');
+const devUtils = require('../controllers/utils/dev.utils');
+
 const router = express.Router();
 
 router.post(
-    '/register'
+    '/register',
+    devUtils.niResponse
 );
 
 router.post(
-    '/login'
+    '/login',
+    devUtils.niResponse
 );
 
 router.get(
-    '/user/:userId'
+    '/user/:userId',
+    devUtils.niResponse
 );
 
 router.put(
-    '/user/:userId'
+    '/user/:userId',
+    devUtils.niResponse
 );
 
 router.post(
-    '/user/:userId/follower'
+    '/user/:userId/follower',
+    devUtils.niResponse
 );
 
 router.get(
-    '/user/:userId/follower'
+    '/user/:userId/follower',
+    devUtils.niResponse
 );
 
 router.delete(
-    '/user/:userId/follower/:followerId'
+    '/user/:userId/follower/:followerId',
+    devUtils.niResponse
 );
 
 module.exports = router;
