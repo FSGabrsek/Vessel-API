@@ -1,4 +1,8 @@
+require('dotenv').config();
+
 const express = require('express');
+const { default: mongoose } = require('mongoose');
+const { connect } = require('./routes/review.routes');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -12,6 +16,16 @@ app.use(reviewRoutes);
 app.use(soulRoutes);
 app.use(userRoutes);
 app.use(vesselRoutes);
+
+mongoose.Promise = global.Promise;
+mongoose.connect(process.env.ATLAS_CONN).then(
+    (mongoose) => {
+        console.log(`[mongoose] connected to ${mongoose.connection.db.databaseName} via ${mongoose.connection.host}`);
+    },
+    (err) => {
+        console.error(err);
+    }
+);
 
 // 404 error message
 app.use((req, res) => {
