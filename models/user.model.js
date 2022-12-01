@@ -6,7 +6,7 @@ const UserSchema = new Schema({
         type: String,
         required: [ true, 'User property "username" is required' ]
     },
-    password: {
+    key: {
         type: String,
         required: [ true, 'User property "password" is required' ]
     },

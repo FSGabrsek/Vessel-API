@@ -12,20 +12,32 @@ const soulRoutes = require('./routes/soul.routes');
 const userRoutes = require('./routes/user.routes');
 const vesselRoutes = require('./routes/vessel.routes');
 
+app.use(express.json())
 app.use(reviewRoutes);
 app.use(soulRoutes);
 app.use(userRoutes);
 app.use(vesselRoutes);
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.ATLAS_CONN).then(
-    (mongoose) => {
-        console.log(`[mongoose] connected to ${mongoose.connection.db.databaseName} via ${mongoose.connection.host}`);
-    },
-    (err) => {
-        console.error(err);
-    }
-);
+if (process.env.NODE_ENV === 'production') {
+    mongoose.connect(process.env.ATLAS_CONN_PROD).then(
+        (mongoose) => {
+            console.log(`[mongoose] connected to ${mongoose.connection.db.databaseName} via ${mongoose.connection.host}`);
+        },
+        (err) => {
+            console.error(err);
+        }
+    );
+} else {
+    mongoose.connect(process.env.ATLAS_CONN_TEST).then(
+        (mongoose) => {
+            console.log(`[mongoose] connected to ${mongoose.connection.db.databaseName} via ${mongoose.connection.host}`);
+        },
+        (err) => {
+            console.error(err);
+        }
+    );
+}
 
 // 404 error message
 app.use((req, res) => {

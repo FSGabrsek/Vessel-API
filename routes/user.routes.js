@@ -1,16 +1,18 @@
 const express = require('express');
+const authenticationController = require('../controllers/authentication.controller');
+const authenticationMiddle = require('../controllers/middleware/authentication.middle');
 const devUtils = require('../controllers/utils/dev.utils');
 
 const router = express.Router();
 
 router.post(
     '/register',
-    devUtils.niResponse
+    authenticationController.register
 );
 
 router.post(
     '/login',
-    devUtils.niResponse
+    authenticationController.login
 );
 
 router.get(
